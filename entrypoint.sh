@@ -9,7 +9,7 @@ then
 else
     if [ "$CMD" == "ss-local" ];
     then
-      OPS="server;tls;fast-open;host=${HOST};path=/v2ray;"
+      OPS="tls;fast-open;host=${HOST};path=/v2ray;"
     else
       OPS="server;tls;fast-open;host=${HOST};path=/v2ray;cert=/certificates/${HOST}/fullchain.pem;key=/certificates/${HOST}/privkey.pem;"
     fi
