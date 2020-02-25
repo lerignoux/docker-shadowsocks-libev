@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  server:
+    container_name: shadowsocks-libev-server
+    image: lerignoux/shadowsocks-libev:latest
+    ports:
+      - "8388:8388/tcp"
+      - "8388:8388/udp"
+    volumes:
+      - /root/config.json:/etc/shadowsocks/config.json
+      - /root/acme:/certificates:ro
+    environment:
+      - HOST=my.host.com
+      - v2ray=1
+    restart: always
+
+  client:
+    container_name: shadowsocks-libev-client
+    image: lerignoux/shadowsocks-libev:latest
+    ports:
+      - "1080:1080/tcp"
+      - "1080:1080/udp"
+    volumes:
+      - /root/config.json:/etc/shadowsocks/config.json
+    environment:
+      - HOST=my.host.com
+      - v2ray=1
+    command: ss-local
+    restart: always
